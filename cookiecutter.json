@@ -6,6 +6,7 @@
     "github_repository_url": ["https://github.com/{{cookiecutter.github_username_or_organization}}/{{cookiecutter.plugin_name}}", "provide later"],
     "module_name": "{{ cookiecutter.plugin_name|lower|replace('-', '_') }}",
     "short_description": "A simple plugin to use with napari",
+    "docs_tool": ["none"],
     "license": [
         "BSD-3",
         "MIT",
