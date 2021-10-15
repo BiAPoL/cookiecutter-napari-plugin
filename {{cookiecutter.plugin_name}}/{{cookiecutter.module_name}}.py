@@ -2,9 +2,6 @@
 """
 This module is an example of a barebones function plugin for napari
 
-It implements the ``napari_experimental_provide_function`` hook specification.
-see: https://napari.org/docs/dev/plugins/hook_specifications.html
-
 Replace code below according to your needs.
 """
 from enum import Enum

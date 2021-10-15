@@ -2,6 +2,8 @@
 
 Minimal [Cookiecutter] template for authoring [napari] plugins.
 
+This is a customized minimal minimal version maintained by [BiA-PoL](https://physics-of-life.tu-dresden.de/bia). 
+If you're interested in the original, more flexible napari plugin template, please check [cookiecutter-napari-plugin](https://github.com/napari/cookiecutter-napari-plugin)/
 
 **NOTE: This repo is not meant to be cloned/forked directly!  Please read "Getting Started" below**
 
@@ -30,17 +32,6 @@ github_username_or_organization [githubuser]: neuronz52
 plugin_name [napari-foobar]: napari-growth-cone-finder
 module_name [growth_cone_finder]: napari_growth_cone_finder
 short_description [A simple plugin to use with napari]:
-# you can select from various plugin template examples
-include_reader_plugin [y]:
-include_writer_plugin [y]:
-include_dock_widget_plugin [y]:
-include_function_plugin [y]:
-
-Select docs_tool:
-1 - mkdocs
-2 - sphinx
-3 - none
-Choose from 1, 2, 3 [1]: 3
 Select license:
 1 - BSD-3
 2 - MIT
@@ -49,7 +40,6 @@ Select license:
 5 - GNU LGPL v3.0
 6 - GNU GPL v3.0
 Choose from 1, 2, 3, 4, 5, 6 (1, 2, 3, 4, 5, 6) [1]:
-INFO:post_gen_project:Moving files for mkdocs.
 ```
 
 You just created a minimal napari plugin, complete with tests
@@ -60,26 +50,12 @@ For more detailed information on each prompt see the [prompts reference](./PROMP
 ```no-highlight
 napari-growth-cone-finder/
 │
-├── .github
-│   └── workflows
-│      └── test_and_deploy.yml
-├── docs
-│   └── index.md
 ├── LICENSE
 ├── MANIFEST.in
-├── mkdocs.yml
-├── napari_growth_cone_finder
-│   ├── __init__.py
-│   ├── _dock_widget.py
-│   ├── _reader.py
-│   └── _tests
-│       ├── __init__.py
-│       ├── test_dock_widget.py
-│       └── test_reader.py
+├── napari_growth_cone_finder.py
 ├── README.md
 ├── requirements.txt
-├── setup.py
-└── tox.ini
+└── setup.py
 ```
 
 ### Initialize a git repository in your package
@@ -110,111 +86,6 @@ git commit -m 'initial commit'
     git push -u origin master
     ```
 
-### Monitor testing and coverage
-
-The repository should already be setup to run your tests each time you push an
-update (configuration is in `.github/workflows/test_and_deploy.yml`). You can
-monitor them in the "Actions" tab of your github repository.  If you're
-following along, go have a look... they should be running right now!
-
-When the tests are done, test coverage will be viewable at
-[codecov.io](https://codecov.io/) (assuming your repository is public):
-`https://codecov.io/gh/<your-github-username>/<your-package-name>`
-
-### Set up automatic deployments
-
-Your new package is also nearly ready to automatically deploy to [PyPI]
-(whenever you create a tagged release), so that your users can simply `pip
-install` your package. You just need to create an [API token to authenticate
-with PyPi](https://pypi.org/help/#apitoken), and then add it to your github
-repository:
-
-1. If you don't already have one, [create an
-   account](https://pypi.org/account/register/) at [PyPI]
-2. Verify your email address with PyPI, (if you haven't already)
-3. Generate an [API token](https://pypi.org/help/#apitoken) at PyPi: In your
-   [account settings](https://pypi.org/manage/account/) go to the API tokens
-   section and select "Add API token". Make sure to copy it somewhere safe!
-4. [Create a new encrypted
-   secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets)"
-   in your github repository with the name "TWINE_API_KEY", and paste in your
-   API token.
-
-You are now setup for automatic deployment!
-
-### Automatic deployment and version management
-
-Each time you want to deploy a new version, you just need to create a tagged
-commit, and push it to your master branch on github.  Your package is set up to
-use [setuptools_scm](https://github.com/pypa/setuptools_scm) for version
-management, meaning you don't need to hard-code your version anywhere in your
-package.  It will be inferred from the tag each time you release.
-
-```bash
-# the tag will be used as the version string for your package
-# make it meaningful: https://semver.org/
-git tag -a v0.1.0 -m "v0.1.0"
-
-# make sure to use follow-tags so that the tag also gets pushed to github
-git push --follow-tags
-```
-
-> Note: as of git 2.4.1, you can set `follow-tags` as default with
-> `git config --global push.followTags true`
-
-Monitor the "actions" tab on your github repo for progress... and when the
-"deploy" step is finished, your new version should be visible on pypi:
-
-`https://pypi.org/project/<your-package-name>/`
-
-and available for pip install with:
-
-```bash
-# for example
-pip install napari-growth-cone-finder
-```
-
-### Testing locally
-
-You can run your tests locally in multiple different python environments using
-[tox], just by entering `tox` on the command line. If you are using `conda` for
-environment management, you may wish to install `tox-conda` to make tox play
-nice with conda.
-
-```bash
-pip install tox tox-conda
-tox -e py36,py37,py38 # run tests on multiple python versions
-```
-
-If you don't wish to test locally on all supported python versions, you can test
-quicker by just using pytest directly, (but you'll need to make sure that
-`pytest` and your package is installed in your environment):
-
-```bash
-pip install -e .
-pip install pytest
-
-pytest  # run test in current environment
-```
-
-### Create your documentation
-
-If you chose to create docs with your plugin read the corresponding docs
-for [Sphinx] or [MkDocs]
-
-## Features
-
-- Installable [PyPI] package featuring a `setup.py`
-- [tox] test suite, testing various python versions and platforms.
-- `README.md` file that contains useful information about your plugin
-- Continuous integration configuration for [github actions] that handles testing
-  and deployment of tagged releases
-- git-tag-based version management with [setuptools_scm]
-- Optional documentation with either [Sphinx] or [MkDocs]
-- Choose from several licenses, including [BSD-3], [MIT], [MPL v2.0], [Apache
-  v2.0], [GNU GPL v3.0], or [GNU LGPL v3.0]
-
-
 ## Resources
 
 Please consult the [napari plugin
@@ -242,7 +113,7 @@ is free and open source software.
 [napari]: https://github.com/napari/napari
 [PyPI]: https://pypi.org/
 [tox]: https://tox.readthedocs.io/en/latest/
-[file an issue]: https://github.com/napari/cookiecutter-napari-plugin/issues
+[file an issue]: https://github.com/biapol/cookiecutter-napari-plugin/issues
 [Sphinx]: http://sphinx-doc.org/
 [MkDocs]: http://www.mkdocs.org/
 [MIT]: http://opensource.org/licenses/MIT
